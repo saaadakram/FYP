@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout";
 import { Row } from "antd";
 import DoctorsList from "../components/DoctorsList";
-
+import "../App.css";
 const Home = () => {
   const [doctors, setDoctors] = useState([]);
-
-  // Fetch doctors from backend
+  ////Login User DAta
   const getUserData = async () => {
     try {
       const res = await axios.get("http://localhost:9090/api/getAllDoctors", {
@@ -15,7 +15,6 @@ const Home = () => {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
       });
-
       if (res.data.success) {
         setDoctors(res.data.data);
       }
@@ -23,23 +22,57 @@ const Home = () => {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getUserData();
   }, []);
 
   return (
     <Layout>
-      <h1 className="text-center mt-2 display-6 font-weight-bold">
-        Meet Our Specialist
-        <hr className="text-purple border-2" />
+      <h1 className="  text-center mt-2 display-6 font-weight-bold            ">
+        Meet Our Specialist <hr className=" text-purple border-2" />
       </h1>
+      <Row style={{ margin: "-10px" }}>
+        {[
+          "/images/doc1.jpg",
+          "/images/doc2.jpg",
+          "/images/doc3.jpg",
+          "/images/doc4.jpg",
+          "/images/doc5.jpg",
+          "/images/doc6.jpg",
+        ].map((img, index) => (
+          <div
+            className="col-12 col-md-6 col-lg-4"
+            key={index}
+            style={{ padding: "10px" }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "250px",
+                borderRadius: "10px",
+                transition: "0.3s",
+              }}
+              className="image-container"
+            >
+              <img
+                src={img}
+                alt="Doctors"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                  borderRadius: "10px",
+                }}
+                className="hover-blue-outline"
+              />
+            </div>
+          </div>
+        ))}
 
-      <Row gutter={[16, 16]} justify="center">
         {doctors &&
-          doctors.map((doctor, index) => (
-            // Pass the original doctor object + index for images
-            <DoctorsList key={doctor._id} doctor={doctor} index={index} />
+          doctors.map((doctor) => (
+            <DoctorsList doctor={doctor} key={doctor._id} />
           ))}
       </Row>
     </Layout>

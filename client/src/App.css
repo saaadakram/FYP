@@ -1,0 +1,9 @@
+.hover-blue-outline {
+  transition: all 0.3s ease; /* smooth animation */
+}
+
+.hover-blue-outline:hover {
+  box-shadow: 0 0 0 4px #007bff; /* blue outline */
+  transform: scale(1.03); /* optional zoom */
+  cursor: pointer;
+}
