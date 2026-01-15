@@ -3,6 +3,7 @@ import React from 'react'
 import { useState ,useEffect} from 'react'
 import axios from "axios"
 import { Table } from 'antd'
+import API_BASE_URL from '../../services/api'
 
 const Users = () => {
  const [users,setUsers]=useState([])
@@ -10,7 +11,7 @@ const Users = () => {
  ///Get Users
  const getUsers=async()=>{
 try {
-let res= await axios.get('http://localhost:9090/api/admin/getAllusers',{
+let res= await axios.get(`${API_BASE_URL}/api/admin/getAllusers`,{
     headers:{
         Authorization:  `Bearer ${localStorage.getItem("token")}`
     }

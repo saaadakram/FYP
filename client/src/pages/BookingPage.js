@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import Layout from '../components/Layout'
 import "../styles/booking.css"
 import axios from "axios"
+import API_BASE_URL from '../services/api'
 import { useParams } from 'react-router-dom'
 import { DatePicker, TimePicker, message } from 'antd'
 import moment from "moment"
@@ -24,7 +25,7 @@ const BookingPage = () => {
    
     const getUser=async()=>{
 try {
-    const res=await axios.post("http://localhost:9090/api/doctor/getdoctorbyid",
+    const res=await axios.post(`${API_BASE_URL}/api/doctor/getdoctorbyid`,
     {doctorId: params.doctorId},
     {
      headers:{
@@ -52,7 +53,7 @@ const handleBooking=async()=>{
         return alert("Date And Time Required")
     }
         dispatch(showLoading())
-    const res= await axios.post('http://localhost:9090/api/book-appointment',
+    const res= await axios.post(`${API_BASE_URL}/api/book-appointment`,
     {doctorId: params.doctorId,
     userId:user._id,
     doctorInfo:doctors,
@@ -83,7 +84,7 @@ const handleBooking=async()=>{
 const chekAvail=async()=>{
 try {
     dispatch(showLoading())
-    const res= await axios.post('http://localhost:9090/api/booking-availability',
+    const res= await axios.post(`${API_BASE_URL}/api/booking-availability`,
     {doctorId:params.doctorId, date,time},
     {  headers:{
         Authorization: `Bearer ${localStorage.getItem("token")}`

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import {showLoading,hideLoading} from '../redux/features/alertSlice'
 import axios from "axios"
 import moment from 'moment'
+import API_BASE_URL from '../services/api'
 const ApplyDoctor = () => {
   const {user}=useSelector(state => state.user)
 const dispatch=useDispatch()
@@ -17,7 +18,7 @@ const navigate=useNavigate()
 const handleFinish=async(values)=>{
 try {
   dispatch(showLoading())
-const response= await axios.post("http://localhost:9090/api/apply-doctor",{...values, userId:user._id,
+const response= await axios.post(`${API_BASE_URL}/api/apply-doctor`,{...values, userId:user._id,
 timings:[
   moment(values.timings[0]).format("HH:mm"),
   moment(values.timings[1]).format("HH:mm"),

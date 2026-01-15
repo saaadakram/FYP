@@ -3,12 +3,13 @@ import React from 'react'
 import axios from 'axios'
 import{Table, message} from "antd"
 import { useState,useEffect } from 'react'
+import API_BASE_URL from '../../services/api'
 const Doctors = () => {
   const [doctors,setDoctors]=useState([])
 
   const getDoctors=async()=>{
     try {
-    let res= await axios.get('http://localhost:9090/api/admin/getAlldoctors',{
+    let res= await axios.get(`${API_BASE_URL}/api/admin/getAlldoctors`,{
         headers:{
             Authorization:  `Bearer ${localStorage.getItem("token")}`
         }
@@ -26,7 +27,7 @@ const Doctors = () => {
 //////Handle Account
 const handleAccountStatus=async (record, status)=>{
 try {
-  let res= await axios.post('http://localhost:9090/api/admin/changeAccountStatus',
+  let res= await axios.post(`${API_BASE_URL}/api/admin/changeAccountStatus`,
   { doctorId: record._id, userId: record.userId, status:status, },
   { headers:{
       Authorization: `Bearer ${localStorage.getItem("token")}` }

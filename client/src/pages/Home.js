@@ -4,13 +4,14 @@ import axios from "axios";
 import Layout from "../components/Layout";
 import { Row } from "antd";
 import DoctorsList from "../components/DoctorsList";
+import API_BASE_URL from "../services/api";
 import "../App.css";
 const Home = () => {
   const [doctors, setDoctors] = useState([]);
   ////Login User DAta
   const getUserData = async () => {
     try {
-      const res = await axios.get("http://localhost:9090/api/getAllDoctors", {
+      const res = await axios.get(`${API_BASE_URL}/api/getAllDoctors`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

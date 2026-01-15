@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import '../styles/register.css'
 import {useDispatch} from "react-redux"
 import { showLoading,hideLoading } from '../redux/features/alertSlice'
-
+import API_BASE_URL from '../services/api'
 import {Link,useNavigate} from 'react-router-dom'
 
 
@@ -18,7 +18,7 @@ const Register = () => {
     
 try {
   dispatch(showLoading())
-let response= await fetch('http://localhost:9090/api/register',{
+let response= await fetch(`${API_BASE_URL}/api/register`,{
   method:"POST",
   body:JSON.stringify({name,email,password}),
   headers:{

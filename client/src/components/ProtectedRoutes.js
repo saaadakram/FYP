@@ -5,6 +5,7 @@ import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import { SetUser } from "../redux/features/userSlice";
 import Spinner from "./Spinner";
+import API_BASE_URL from "../services/api";
 
 export default function ProtectedRoutes({ children }) {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function ProtectedRoutes({ children }) {
       if (!token) throw new Error("No token");
 
       const response = await axios.post(
-        "http://localhost:9090/api/getUser",
+        `${API_BASE_URL}/api/getUser`,
         { token },
         {
           headers: {

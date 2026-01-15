@@ -4,13 +4,14 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import moment from "moment"
 import { Table } from 'antd'
+import API_BASE_URL from '../services/api'
 
 const Appointmnets = () => {
     const [appointments,setAppointments]=useState([])
  
 const getAppointments=async()=>{
 try {
-    const res= await axios.get("http://localhost:9090/api/users-appointments",
+    const res= await axios.get(`${API_BASE_URL}/api/users-appointments`,
      {  headers:{
         Authorization: `Bearer ${localStorage.getItem("token")}`
     }})

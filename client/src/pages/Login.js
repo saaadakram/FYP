@@ -3,7 +3,7 @@ import '../styles/login.css'
 import {useDispatch} from 'react-redux'
 import { showLoading,hideLoading } from '../redux/features/alertSlice'
 import {motion} from 'framer-motion'
-
+import API_BASE_URL from '../services/api'
 import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
 const Login = () => {
@@ -43,7 +43,7 @@ const [password,setPassword]=useState('')
   
 try {
 dispatch(showLoading())
-let response= await fetch('http://localhost:9090/api/login',{
+let response= await fetch(`${API_BASE_URL}/api/login`,{
 method:"POST",
 body:JSON.stringify({email,password}),
 headers:{

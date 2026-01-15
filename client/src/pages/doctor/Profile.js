@@ -5,6 +5,7 @@ import { useParams,useNavigate } from 'react-router-dom'
 import { Col, Form, Row, message, TimePicker } from 'antd'
 import axios from "axios"
 import Input from 'antd/es/input/Input'
+import API_BASE_URL from '../../services/api'
 import {showLoading,hideLoading} from "../../redux/features/alertSlice"
 import moment from "moment"
 
@@ -20,7 +21,7 @@ const Profile = () => {
 const handleFinish=async(values)=>{
   try {
     dispatch(showLoading())
-  const res= await axios.post("http://localhost:9090/api/doctor/updateprofile",
+  const res= await axios.post(`${API_BASE_URL}/api/doctor/updateprofile`,
   {...values, userId:user._id,
      timings:[
       moment(values.timings[0]).format("HH:mm"),
@@ -53,7 +54,7 @@ const handleFinish=async(values)=>{
 
 const getDoctorinfo=async()=>{
 try {
-  const res= await axios.post('http://localhost:9090/api/doctor/getDoctorInfo',{userId:params.id},
+  const res= await axios.post(`${API_BASE_URL}/api/doctor/getDoctorInfo`,{userId:params.id},
   {
     headers:{
       Authorization: `Bearer ${localStorage.getItem("token")}`

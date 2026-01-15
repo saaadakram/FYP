@@ -2,7 +2,7 @@ import React from 'react'
 import "../styles/notification.css";
 import Layout from '../components/Layout'
 import { Tabs,message } from 'antd'
-
+import API_BASE_URL from '../services/api'
 import { useDispatch, useSelector } from 'react-redux'
 import{ hideLoading, showLoading } from '../redux/features/alertSlice'
 import { useNavigate } from 'react-router-dom'
@@ -15,7 +15,7 @@ const NotificationPage = () => {
    const handleMarkedAll=async()=>{
     try {
       dispatch(showLoading)
-      const res= await axios.post("http://localhost:9090/api/get-all-notification",{userId:user._id},{
+      const res= await axios.post(`${API_BASE_URL}/api/get-all-notification`,{userId:user._id},{
         headers:{
           Authorization: `Bearer ${localStorage.getItem("token")}`
         }
@@ -43,7 +43,7 @@ const NotificationPage = () => {
    const handleDeleteRead=async()=>{
 try {
   dispatch(showLoading())
-let res= await axios.post("http://localhost:9090/api/delete-all-notification",{userId:user._id},{
+let res= await axios.post(`${API_BASE_URL}/api/delete-all-notification`,{userId:user._id},{
   headers:{
     Authorization: `Bearer ${localStorage.getItem("token")}`
   }
